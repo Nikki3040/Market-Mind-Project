@@ -616,7 +616,7 @@ with tabs[4]:
         <div style='background-color: #e0f7fa; padding: 20px; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); border: 1px solid #81d4fa;'>
             <h3 style='margin-bottom: 10px;'>Nervous About Interpreting the Forecast Plot?</h3>
             <p style='font-size: 16px;'>
-                Don't be! The forecast visual shows past stock prices and predicted future trends. We have described each component of the visual to help you get your head around it!
+                Don't be! The forecast visual shows past stock prices and predicted future trends based on your preferences. We have described each component of the visual to help you get your head around it!
             </p>
             <ul style='font-size: 16px;'>
                 <li><b>Actual (blue solid line):</b> Real historical stock prices based on your selected window.</li>
