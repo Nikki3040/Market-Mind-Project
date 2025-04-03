@@ -608,7 +608,7 @@ with tabs[4]:
                 Prophet is an open-source forecasting tool developed by Facebook designed to handle time series data that has clear trends and seasonality. It works especially well with daily financial data and allows easy customization.
             </p>
             <p style='font-size: 16px;'>
-                In this tab, we harness the power of machine learning to predict short-term asset price trends based on historical data. 
+                In this tab, we harness the power of machine learning to predict short-term stock price trends based on historical data. 
                 Note that while no model guarantees future returns, using ML-powered tools like Prophet can offer unique data-driven guidance that can provide useful insights to boost your trading and investment strategies. Happy forecasting!
             </p>
         </div>
