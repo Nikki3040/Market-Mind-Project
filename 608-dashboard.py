@@ -160,7 +160,7 @@ with tabs[0]:
     col_labels = st.columns([1.6, 1.2, 1.2, 1.3, 1.3, 1.5])
     col_labels[0].markdown("**Stock**")
     col_labels[1].markdown("**Symbol**")
-    #col_labels[2].markdown("**Latest Closing Price**")
+    col_labels[2].markdown("**Latest Closing Price**")
     col_labels[3].markdown("**Today's Open Price**")  
     col_labels[4].markdown("**% Change**")            
     col_labels[5].markdown("**7-Day Trend**")
@@ -188,7 +188,7 @@ with tabs[0]:
         cols = st.columns([1.6, 1.2, 1.2, 1.3, 1.3, 1.5])
         cols[0].markdown(f"**{row['stock']}**")
         cols[1].markdown(f"`{row['symbol_curr']}`")
-        #cols[2].markdown(f"**${row['close_curr']:.2f}**")
+        cols[2].markdown(f"**${row['close_curr']:.2f}**")
         cols[2].markdown(f"**${row['open_curr']:.2f}**")
         cols[3].markdown(
             f"<span style='color:{row['color']}; font-weight:bold;'>{row['arrow']} {row['pct_change']:.2f}%</span>",
