@@ -625,12 +625,12 @@ with tabs[4]:
                 <li><b>Shaded area:</b> Confidence interval, showing the range where the price is most likely to fall.</li>
             </ul>
             <p style='font-size: 16px;'>
-                Use our newly-added price forecasting tool below to identify expected trends for any asset (stock or cryptocurrency) of your choice!
+                Use our newly-added price forecasting tool below to identify expected trends for any of the top 10 stocks!
             </p>
         </div>
         """, unsafe_allow_html=True)
 
-    st.header("Asset (Stock/Cryptocurrency) Price Forecasting with Prophet")
+    st.header("Stock Price Forecasting with Prophet")
     st.markdown("Forecast future stock prices using Prophet with historical data.")
 
     symbol_list = df["stock"].value_counts().nlargest(20).index.tolist()
