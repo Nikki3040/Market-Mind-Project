@@ -3,4 +3,4 @@ plotly
 pandas
 numpy
 Pillow
-pmdarima
+pmdarima==1.8.5
