@@ -160,7 +160,7 @@ with tabs[0]:
     col_labels = st.columns([1.6, 1.2, 1.2, 1.3, 1.3, 1.5])
     col_labels[0].markdown("**Stock**")
     col_labels[1].markdown("**Symbol**")
-    col_labels[2].markdown("**Latest Closing Price**")
+    #col_labels[2].markdown("**Latest Closing Price**")
     col_labels[3].markdown("**Today's Open Price**")  
     col_labels[4].markdown("**% Change**")            
     col_labels[5].markdown("**7-Day Trend**")
