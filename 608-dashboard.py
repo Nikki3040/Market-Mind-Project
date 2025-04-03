@@ -341,10 +341,10 @@ with tabs[1]:
     col_labels = st.columns([1.6, 1.2, 1.2, 1.3, 1.3, 1.5])
     col_labels[0].markdown("**Cryptocurrency**")
     col_labels[1].markdown("**Symbol**")
-    col_labels[2].markdown("**Latest Closing Price**")
-    col_labels[3].markdown("**Today's Open Price**")  
-    col_labels[4].markdown("**% Change**")         
-    col_labels[5].markdown("**7-Day Trend**")
+    #col_labels[2].markdown("**Latest Closing Price**")
+    col_labels[2].markdown("**Today's Open Price**")  
+    col_labels[3].markdown("**% Change**")         
+    col_labels[4].markdown("**7-Day Trend**")
 
     for _, row in change_df.iterrows():
         spark_data = crypto_df[(crypto_df["symbol"] == row["symbol"]) & (crypto_df["date"] >= latest_crypto_date - pd.Timedelta(days=7))]
@@ -370,12 +370,12 @@ with tabs[1]:
         cols = st.columns([1.6, 1.2, 1.2, 1.3, 1.3, 1.5])
         cols[0].markdown(f"**{row['crypto_curr']}**")
         cols[1].markdown(f"`{row['symbol']}`")
-        cols[2].markdown(f"**${row['close_curr']:.2f}**")
-        cols[3].markdown(f"**${row['open_curr']:.2f}**") 
-        cols[4].markdown(
+        #cols[2].markdown(f"**${row['close_curr']:.2f}**")
+        cols[2].markdown(f"**${row['open_curr']:.2f}**") 
+        cols[3].markdown(
             f"<span style='color:{row['color']}; font-weight:bold;'>{row['arrow']} {row['pct_change']:.2f}%</span>",
             unsafe_allow_html=True)                     
-        with cols[5]:
+        with cols[4]:
             st.plotly_chart(spark_fig, use_container_width=True)
 
     st.header("Top Cryptocurrencies Historical Trends Viewer")
