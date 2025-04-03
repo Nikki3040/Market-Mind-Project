@@ -188,13 +188,13 @@ with tabs[0]:
         cols = st.columns([1.6, 1.2, 1.2, 1.3, 1.3, 1.5])
         cols[0].markdown(f"**{row['stock']}**")
         cols[1].markdown(f"`{row['symbol_curr']}`")
-        cols[2].markdown(f"**${row['close_curr']:.2f}**")
-        cols[3].markdown(f"**${row['open_curr']:.2f}**")
-        cols[4].markdown(
+        #cols[2].markdown(f"**${row['close_curr']:.2f}**")
+        cols[2].markdown(f"**${row['open_curr']:.2f}**")
+        cols[3].markdown(
             f"<span style='color:{row['color']}; font-weight:bold;'>{row['arrow']} {row['pct_change']:.2f}%</span>",
             unsafe_allow_html=True)
         
-        with cols[5]:
+        with cols[4]:
             st.plotly_chart(spark_fig, use_container_width=True)
 
     # Historical Trends Viewer
