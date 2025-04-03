@@ -339,7 +339,7 @@ with tabs[1]:
     change_df["color"] = change_df["pct_change"].apply(lambda x: "green" if x > 0 else "red")
 
     col_labels = st.columns([1.6, 1.2, 1.2, 1.3, 1.3, 1.5])
-    col_labels[0].markdown("**Crypto**")
+    col_labels[0].markdown("**Cryptocurrency**")
     col_labels[1].markdown("**Symbol**")
     col_labels[2].markdown("**Latest Closing Price**")
     col_labels[3].markdown("**Today's Open Price**")  
