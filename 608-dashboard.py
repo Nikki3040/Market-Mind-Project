@@ -142,7 +142,7 @@ with tabs[0]:
         </div>
         """, unsafe_allow_html=True)
 
-    st.header("Today's Top Stocks Snapshot")
+    st.header("Top Stocks Snapshot")
     latest_date = df["date"].max()
     prev_date = df[df["date"] < latest_date]["date"].max()
     latest_snapshot = df[df["date"] == latest_date]
