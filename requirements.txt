@@ -1,6 +1,6 @@
 streamlit
 plotly
 pandas
-numpy
+numpy==1.23.5
 Pillow
 pmdarima==1.8.5
