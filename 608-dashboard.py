@@ -21,7 +21,7 @@ import plotly.graph_objects as go
 # --------------------------------------
 # PAGE CONFIGURATION
 # --------------------------------------
-st.set_page_config(page_title="📊 MarketMind", layout="wide")
+st.set_page_config(page_title="MarketMind", layout="wide")
 dark_mode = st.sidebar.toggle("Toggle Dark Mode") # Functionality does not work, but we think the idea is cool
 plotly_theme = "plotly_dark" if dark_mode else "plotly_white"
 
@@ -110,7 +110,7 @@ econ_df["month_name"] = pd.Categorical(econ_df["month_name"], categories=month_o
 # TITLE AND TABS
 # --------------------------------------
 st.title("\"MarketMind\": Finance for Everyone")
-tabs = st.tabs(["📈 STOCKS", "💰 CRYPTOCURRENCY", "📊 ECONOMIC INDICATORS", "🚀 TOP GAINERS", "🔮 ML-POWERED PREDICTIVE INSIGHTS"])
+tabs = st.tabs(["STOCKS", "CRYPTOCURRENCY", "ECONOMIC INDICATORS", "TOP GAINERS", "ML-POWERED PREDICTIVE INSIGHTS"])
 
 # --------------------------------------
 # STOCKS TAB
