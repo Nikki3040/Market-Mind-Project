@@ -8,7 +8,7 @@ import io
 import plotly.express as px
 import plotly.graph_objects as go
 #import pmdarima as pm
-from statsmodels.tsa.arima.model import ARIMA
+#from statsmodels.tsa.arima.model import ARIMA
 from datetime import timedelta
 import base64
 import numpy as np
