@@ -21,7 +21,7 @@ import plotly.graph_objects as go
 # --------------------------------------
 # PAGE CONFIGURATION
 # --------------------------------------
-st.set_page_config(page_title="MarketMind", layout="wide")
+st.set_page_config(page_title="📊 MarketMind", layout="wide")
 dark_mode = st.sidebar.toggle("Toggle Dark Mode") # Functionality does not work, but we think the idea is cool
 plotly_theme = "plotly_dark" if dark_mode else "plotly_white"
 
@@ -110,7 +110,7 @@ econ_df["month_name"] = pd.Categorical(econ_df["month_name"], categories=month_o
 # TITLE AND TABS
 # --------------------------------------
 st.title("\"MarketMind\": Finance for Everyone")
-tabs = st.tabs(["STOCKS", "CRYPTOCURRENCY", "ECONOMIC INDICATORS", "TOP GAINERS", "ML-POWERED PREDICTIVE INSIGHTS"])
+tabs = st.tabs(["📈 STOCKS", "💰 CRYPTOCURRENCY", "📊 ECONOMIC INDICATORS", "🚀 TOP GAINERS", "🔮 ML-POWERED PREDICTIVE INSIGHTS"])
 
 # --------------------------------------
 # STOCKS TAB
@@ -142,7 +142,7 @@ with tabs[0]:
         </div>
         """, unsafe_allow_html=True)
 
-    st.header("Top Stocks Snapshot")
+    st.header("Today's Top Stocks Snapshot")
     latest_date = df["date"].max()
     prev_date = df[df["date"] < latest_date]["date"].max()
     latest_snapshot = df[df["date"] == latest_date]
@@ -153,24 +153,25 @@ with tabs[0]:
     prev_snapshot_top = prev_snapshot[prev_snapshot["stock"].isin(top_stocks)]
 
     change_df = pd.merge(snapshot_top, prev_snapshot_top, on="stock", suffixes=("_curr", "_prev"))
-    change_df["pct_change"] = ((change_df["close_curr"] - change_df["close_prev"]) / change_df["close_prev"]) * 100
+    change_df["pct_change"] = ((change_df["open_curr"] - change_df["close_curr"]) / change_df["close_curr"]) * 100
+
     change_df["arrow"] = change_df["pct_change"].apply(lambda x: "▲" if x > 0 else "▼")
     change_df["color"] = change_df["pct_change"].apply(lambda x: "green" if x > 0 else "red")
 
     col_labels = st.columns([1.6, 1.2, 1.2, 1.3, 1.3, 1.5])
     col_labels[0].markdown("**Stock**")
     col_labels[1].markdown("**Symbol**")
-    #col_labels[2].markdown("**Latest Closing Price**")
-    col_labels[2].markdown("**Today's Open Price**")  
-    col_labels[3].markdown("**% Change**")            
-    col_labels[4].markdown("**7-Day Trend**")
+    col_labels[2].markdown("**Latest Closing Price**")
+    col_labels[3].markdown("**Today's Open Price**")  
+    col_labels[4].markdown("**% Change**")            
+    col_labels[5].markdown("**7-Day Trend**")
 
     for _, row in change_df.iterrows():
         spark_data = df[(df["stock"] == row["stock"]) & (df["date"] >= latest_date - pd.Timedelta(days=7))]
         spark_fig = go.Figure()
         spark_fig.add_trace(go.Scatter(
             x=spark_data["date"],
-            y=spark_data["close"],
+            y=spark_data["open"],
             mode="lines",
             line=dict(color=row["color"], width=2),
             hoverinfo="skip",
@@ -188,18 +189,13 @@ with tabs[0]:
         cols = st.columns([1.6, 1.2, 1.2, 1.3, 1.3, 1.5])
         cols[0].markdown(f"**{row['stock']}**")
         cols[1].markdown(f"`{row['symbol_curr']}`")
-        cols[2].markdown(f"**${row['open_curr']:.2f}**")
-        cols[3].markdown(
+        cols[2].markdown(f"**${row['close_curr']:.2f}**")
+        cols[3].markdown(f"**${row['open_curr']:.2f}**")
+        cols[4].markdown(
             f"<span style='color:{row['color']}; font-weight:bold;'>{row['arrow']} {row['pct_change']:.2f}%</span>",
             unsafe_allow_html=True)
         
-        #cols[2].markdown(f"**${row['close_curr']:.2f}**")
-        #cols[3].markdown(f"**${row['open_curr']:.2f}**")
-        #cols[4].markdown(
-        #    f"<span style='color:{row['color']}; font-weight:bold;'>{row['arrow']} {row['pct_change']:.2f}%</span>",
-        #    unsafe_allow_html=True)
-        
-        with cols[4]:
+        with cols[5]:
             st.plotly_chart(spark_fig, use_container_width=True)
 
     # Historical Trends Viewer
@@ -334,25 +330,25 @@ with tabs[1]:
     snapshot_top = latest_crypto_snapshot[latest_crypto_snapshot["symbol"].isin(top_cryptos_info["symbol"])]
 
     change_df = pd.merge(snapshot_top, prev_snapshot_top, on="symbol", suffixes=('_curr', '_prev'))
-    change_df["pct_change"] = ((change_df["close_curr"] - change_df["close_prev"]) / change_df["close_prev"]) * 100
+    change_df["pct_change"] = ((change_df["open_curr"] - change_df["close_curr"]) / change_df["close_curr"]) * 100
+
     change_df["arrow"] = change_df["pct_change"].apply(lambda x: "▲" if x > 0 else "▼")
     change_df["color"] = change_df["pct_change"].apply(lambda x: "green" if x > 0 else "red")
 
     col_labels = st.columns([1.6, 1.2, 1.2, 1.3, 1.3, 1.5])
-    col_labels[0].markdown("**Cryptocurrency**")
+    col_labels[0].markdown("**Crypto**")
     col_labels[1].markdown("**Symbol**")
-    #col_labels[2].markdown("**Latest Closing Price**")
-    col_labels[2].markdown("**Today's Open Price**")  
-    col_labels[3].markdown("**% Change**")         
-    col_labels[4].markdown("**7-Day Trend**")
+    col_labels[2].markdown("**Latest Closing Price**")
+    col_labels[3].markdown("**Today's Open Price**")  
+    col_labels[4].markdown("**% Change**")         
+    col_labels[5].markdown("**7-Day Trend**")
 
     for _, row in change_df.iterrows():
         spark_data = crypto_df[(crypto_df["symbol"] == row["symbol"]) & (crypto_df["date"] >= latest_crypto_date - pd.Timedelta(days=7))]
-
         spark_fig = go.Figure()
         spark_fig.add_trace(go.Scatter(
             x=spark_data["date"],
-            y=spark_data["close"],
+            y=spark_data["open"],
             mode="lines",
             line=dict(color=row["color"], width=2),
             hoverinfo="skip",
@@ -370,12 +366,12 @@ with tabs[1]:
         cols = st.columns([1.6, 1.2, 1.2, 1.3, 1.3, 1.5])
         cols[0].markdown(f"**{row['crypto_curr']}**")
         cols[1].markdown(f"`{row['symbol']}`")
-        #cols[2].markdown(f"**${row['close_curr']:.2f}**")
-        cols[2].markdown(f"**${row['open_curr']:.2f}**") 
-        cols[3].markdown(
+        cols[2].markdown(f"**${row['close_curr']:.2f}**")
+        cols[3].markdown(f"**${row['open_curr']:.2f}**") 
+        cols[4].markdown(
             f"<span style='color:{row['color']}; font-weight:bold;'>{row['arrow']} {row['pct_change']:.2f}%</span>",
             unsafe_allow_html=True)                     
-        with cols[4]:
+        with cols[5]:
             st.plotly_chart(spark_fig, use_container_width=True)
 
     st.header("Top Cryptocurrencies Historical Trends Viewer")
@@ -603,7 +599,7 @@ with tabs[4]:
     with st.container():
         st.markdown("""
         <div style='background-color: #fdecea; padding: 20px; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); border: 1px solid #f5c6cb;'>
-            <h3 style='margin-bottom: 10px;'>What is Prophet and Why Use Machine Learning for Asset Forecasting?</h3>
+            <h3 style='margin-bottom: 10px;'>What is Prophet and Why Use Machine Learning for Stock Price Forecasting?</h3>
             <p style='font-size: 16px;'>
                 Prophet is an open-source forecasting tool developed by Facebook designed to handle time series data that has clear trends and seasonality. It works especially well with daily financial data and allows easy customization.
             </p>
@@ -616,7 +612,7 @@ with tabs[4]:
         <div style='background-color: #e0f7fa; padding: 20px; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); border: 1px solid #81d4fa;'>
             <h3 style='margin-bottom: 10px;'>Nervous About Interpreting the Forecast Plot?</h3>
             <p style='font-size: 16px;'>
-                Don't be! The forecast visual shows past stock prices and predicted future trends based on your preferences. We have described each component of the visual to help you get your head around it!
+                Don't be! The forecast visual shows past stock prices and predicted future trends. We have described each component of the visual to help you get your head around it!
             </p>
             <ul style='font-size: 16px;'>
                 <li><b>Actual (blue solid line):</b> Real historical stock prices based on your selected window.</li>
@@ -625,7 +621,7 @@ with tabs[4]:
                 <li><b>Shaded area:</b> Confidence interval, showing the range where the price is most likely to fall.</li>
             </ul>
             <p style='font-size: 16px;'>
-                Use our newly-added price forecasting tool below to identify expected trends for any of the top 10 stocks!
+                Use our newly-added price forecasting tool below to identify expected trends for any of the Top 10 stocks!
             </p>
         </div>
         """, unsafe_allow_html=True)
